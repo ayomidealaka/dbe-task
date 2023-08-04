@@ -41,7 +41,7 @@ There was a conscious effort to run the init.sql script after creating the conat
 
 ### setup.sh
 
-This file contains all that is needed to automate the creation of the postgres db using the docker-compose file, waits till its creation is complete and then runs the benchmarking queries.
+This file contains all that is needed to automate the creation of the postgres db using the docker-compose file, waits till its creation is complete and then you can run the benchmarking script.
 
 ### benchamrk.sh
 
@@ -68,7 +68,7 @@ Make Bash script executable
   chmod +x setup.sh
 ```
 
-Run script
+Run script to create the postgres container
 
 ```bash
   ./setup.sh
@@ -78,18 +78,14 @@ Run script
 
 ## 1. Benchmark some common queries.
 
-A script was created called benchmark.sh that automates benchamrking the queries. This script checks for the existence of a postgres container named dbe-task-db-1 before it can run.
+A script was created called benchmark.sh that automates benchamrking the queries. This script checks for the existence of a postgres container named dbe-task-db-1 before it runs.
 
-You would need to supply pgbench parameters while running the benchmark.sh script. The parameters iclude:
+You would need to supply pgbench parameters while running the benchmark.sh script. The parameters include:
 
-Here are some common parameters you might use:
-
-```bash
-   -c: Number of concurrent clients (connections). Can be set based on the expected number of simultaneous users.
-   -j: Number of threads. Usually, this would be set to the number of cores on the machine.
-   -t: Number of transactions per client. Can be adjusted to run the desired total number of transactions.
-   -T: Duration of the benchmark in seconds. You can use this instead of -t if you want to run the test for a specific amount of time.
-```
+-c: Number of concurrent clients (connections). Can be set based on the expected number of simultaneous users.
+-j: Number of threads. Usually, this would be set to the number of cores on the machine.
+-t: Number of transactions per client. Can be adjusted to run the desired total number of transactions.
+-T: Duration of the benchmark in seconds. You can use this instead of -t if you want to run the test for a specific amount of time.
 
 Running the script without parameters would prompt the error:
 
