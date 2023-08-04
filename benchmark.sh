@@ -19,7 +19,7 @@ fi
 # Benchmarking using pgbench
 echo "Starting pgbench benchamrk tests..."
 
-echo "Running pgbench benchamark test with parameters: $parameters"
+echo "Running pgbench benchamark test with parameters: $parameters "
 
 echo "Running pgbench for retrieve the names of customers who have placed orders in the last 30 days..."
 
