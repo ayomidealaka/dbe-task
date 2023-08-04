@@ -58,7 +58,7 @@ This file contains script to automate benchamrking using pgbench
 Clone the repository
 
 ```bash
-  git clone https://github.com/mailergroup/dbe-task
+  git clone https://github.com/ayomidealaka/dbe-task
   cd dbe-task
 ```
 
