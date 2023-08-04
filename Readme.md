@@ -43,6 +43,16 @@ There was a conscious effort to run the init.sql script after creating the conat
 
 This file contains all that is needed to automate the creation of the postgres db using the docker-compose file, waits till its creation is complete and then runs the benchmarking queries.
 
+### benchamrk.sh
+
+This file contains script to automate benchamrking using pgbench
+
+### pgbench_names_of_customer_last_30_days.sql
+
+### pgbench_top_selling_prod.sql
+
+### pgbench_total_revenue.sql
+
 ## Setup
 
 Clone the repository
