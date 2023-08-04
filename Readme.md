@@ -341,17 +341,17 @@ This simulates 20 consurrent users, core of 4 with a runtime of 1hr (3600s)
 
 ## 3. Review the database schema and implement any improvements or optimizations, you could make for better performance and scalability.
 
-- Add foreign keys for relationships between tables.
+#### Add foreign keys for relationships between tables.
 
-* Added a foreign key constraint for customer_id in the **orders** table.
-* Added a foreign key constraint for order_id and product_id in the **order_Items** table.
-* Added a foreign key constraint for product_id in the **product** table.
+- Added a foreign key constraint for customer_id in the **orders** table.
+- Added a foreign key constraint for order_id and product_id in the **order_Items** table.
+- Added a foreign key constraint for product_id in the **product** table.
 
-- Adjusted data types for more efficient storage.
+#### Adjusted data types for more efficient storage.
 
-* Changed price in products table from **INT** to **DECIMAL(10, 2)**. This was done to fit other currency datatypes like **subtotal** in the **order_Items** and **total_amount** in the **orders** table.
+- Changed price in products table from **INT** to **DECIMAL(10, 2)**. This was done to fit other currency datatypes like **subtotal** in the **order_Items** and **total_amount** in the **orders** table.
 
-* Add indexes on columns that are frequently searched, filtered, or sorted.
+#### Add indexes on columns that are frequently searched, filtered, or sorted.
 
 - Added index for orders(customer_id), order_Items(order_id) and order_Items(product_id)
 
