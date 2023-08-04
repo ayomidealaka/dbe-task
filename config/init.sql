@@ -1,3 +1,10 @@
+-- CREATE TABLE shops (  -- Added a shops table
+--   shop_id INT PRIMARY KEY,
+--   shop_name VARCHAR(100),
+--   address VARCHAR(200),
+--   phone_number VARCHAR(20)
+-- );
+
 CREATE TABLE customers (
   customer_id INT PRIMARY KEY,
   shop_id INT,
@@ -9,29 +16,50 @@ CREATE TABLE customers (
 );
 
 CREATE TABLE orders (
-  order_id INT PRIMARY KEY,
-  customer_id INT,
+  order_id INT NOT NULL,
   shop_id INT,
-  order_date DATE,
-  total_amount DECIMAL(10, 2)
-);
+  customer_id INT REFERENCES customers(customer_id), -- Added a foreign key constraint.
+  order_date DATE NOT NULL,
+  total_amount DECIMAL(10, 2) 
+)PARTITION BY RANGE (order_date);
+
+ALTER TABLE orders
+ADD CONSTRAINT orders_pk PRIMARY KEY (order_id, order_date);
+
+ALTER TABLE orders
+ADD CONSTRAINT orders_uk UNIQUE (order_id, order_date);
+
+CREATE TABLE orders_01_23 PARTITION OF orders FOR VALUES FROM ('2023-01-01') TO ('2023-02-01');
+CREATE TABLE orders_02_23 PARTITION OF orders FOR VALUES FROM ('2023-02-01') TO ('2023-03-01');
+CREATE TABLE orders_03_23 PARTITION OF orders FOR VALUES FROM ('2023-03-01') TO ('2023-04-01');
+CREATE TABLE orders_04_23 PARTITION OF orders FOR VALUES FROM ('2023-04-01') TO ('2023-05-01');
+CREATE TABLE orders_05_23 PARTITION OF orders FOR VALUES FROM ('2023-05-01') TO ('2023-06-01');
+CREATE TABLE orders_06_23 PARTITION OF orders FOR VALUES FROM ('2023-06-01') TO ('2023-07-01');
+CREATE TABLE orders_07_23 PARTITION OF orders FOR VALUES FROM ('2023-07-01') TO ('2023-08-01');
+CREATE TABLE orders_08_23 PARTITION OF orders FOR VALUES FROM ('2023-08-01') TO ('2023-08-31');
 
 CREATE TABLE products (
   product_id INT PRIMARY KEY,
   shop_id INT,
   product_name VARCHAR(100),
-  price INT,
+  price DECIMAL(10, 2), --Changed from INT
   description VARCHAR(500)
 );
 
 CREATE TABLE order_Items (
   order_item_id INT PRIMARY KEY,
-  order_id INT,
-  product_id INT,
-  shop_id INT,
+  order_id INT, -- Added a foreign key constraint.
+  product_id INT REFERENCES products(product_id), -- Added a foreign key constraint.
+  shop_id INT, 
   quantity INT,
   subtotal DECIMAL(10, 2)
 );
+
+-- Create index for customer_id, order_id and product_id in the orders and order_Items table.
+CREATE INDEX idx_orders_customer_id ON orders(customer_id);
+CREATE INDEX idx_orders_items_order_id ON order_Items(order_id);
+CREATE INDEX idx_order_Items_product_id ON order_Items(product_id);
+
 
 -- Specify the desired number of rows for each table here
 DO $$DECLARE
