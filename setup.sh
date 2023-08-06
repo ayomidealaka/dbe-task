@@ -1,21 +1,18 @@
 #!/bin/bash
 
-echo "Stopping and removing existing PostgreSQL container..."
+# echo "Stopping and removing existing PostgreSQL container..."
 
-# Take down all existing containers in relation to this
-docker-compose down
-docker volume rm dbe-task_db
-
-sleep 5
+# # Take down all existing containers in relation to this
+# docker-compose down
+# docker volume rm dbe-task_db
 
 echo "Starting PostgreSQL container using docker-compose file..."
+sleep 5
 
 docker-compose up -d
 
 # Wait 10s for the database to be ready
 sleep 10
-
-docker-compose up -d
 
 echo "Initializing database with init.sql file..."
 
